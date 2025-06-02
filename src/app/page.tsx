@@ -57,19 +57,26 @@ export default function HomePage() {
   }, [petConfig]);
 
 
-  const handleAddTask = (text: string, isSuggested: boolean = false) => {
+  const handleAddTask = (text: string, isSystemGenerated: boolean = false) => {
+    let taskTextForDisplay = text;
+    if (isSystemGenerated) {
+      // Remove [AI] prefix for display if it's system generated
+      taskTextForDisplay = text.replace(/^\[AI\]\s*/, '');
+    }
+
     const newTask: Task = {
       id: Date.now().toString(), // Simple unique ID
-      text,
+      text: taskTextForDisplay,
       completed: false,
       createdAt: Date.now(),
+      isAISuggested: isSystemGenerated, // Set the flag
     };
     setTasks((prevTasks) => [newTask, ...prevTasks]);
-    if (isSuggested) {
-      // If it's a suggested task, it's added as incomplete. XP is awarded on completion.
+
+    if (isSystemGenerated) {
        toast({
         title: "New Quest Accepted!",
-        description: `"${text}" is ready. Complete it for bonus XP!`,
+        description: `"${taskTextForDisplay}" is ready. Complete it for bonus XP!`,
       });
     }
   };
@@ -77,12 +84,14 @@ export default function HomePage() {
   const handleToggleComplete = (id: string) => {
     let taskCompletedText = "";
     let wasAlreadyCompleted = false;
+    let taskIsAISuggested = false;
 
     setTasks((prevTasks) =>
       prevTasks.map((task) => {
         if (task.id === id) {
           taskCompletedText = task.text;
           wasAlreadyCompleted = task.completed;
+          taskIsAISuggested = !!task.isAISuggested; // Check the flag
           return { ...task, completed: !task.completed };
         }
         return task;
@@ -90,8 +99,7 @@ export default function HomePage() {
     );
 
     if (!wasAlreadyCompleted) {
-      const isSuggested = tasks.find(t => t.id === id)?.text.startsWith("[AI] "); // A simple check
-      const xpGained = isSuggested ? XP_PER_SUGGESTED_TASK : XP_PER_TASK;
+      const xpGained = taskIsAISuggested ? XP_PER_SUGGESTED_TASK : XP_PER_TASK;
       
       setUserStats((prevStats) => {
         const newXp = prevStats.xp + xpGained;
@@ -160,6 +168,8 @@ export default function HomePage() {
         
         <section aria-labelledby="task-suggestions-heading">
           <h2 id="task-suggestions-heading" className="sr-only">Task Suggestions</h2>
+          {/* Pass the raw suggestion text to handleAddTask, it will be prefixed with [AI] */}
+          {/* The handleAddTask function will then strip it for display and set the isAISuggested flag */}
           <TaskSuggestions currentTasks={currentTaskTexts} onAddSuggestedTask={(text) => handleAddTask(`[AI] ${text}`, true)} />
         </section>
       </main>

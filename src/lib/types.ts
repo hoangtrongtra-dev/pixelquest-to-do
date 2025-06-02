@@ -3,6 +3,7 @@ export interface Task {
   text: string;
   completed: boolean;
   createdAt: number;
+  isAISuggested?: boolean; // Added to track AI-suggested tasks
 }
 
 export interface UserStats {
