@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        body: ['"Space Grotesk"', 'sans-serif'],
+        headline: ['"Space Grotesk"', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
@@ -68,8 +68,8 @@ export default {
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        md: 'calc(var(--radius) - 0px)', // Keep md and sm same as lg for pixel style
+        sm: 'calc(var(--radius) - 0px)',
       },
       keyframes: {
         'accordion-down': {
@@ -88,11 +88,28 @@ export default {
             height: '0',
           },
         },
+        sparkle: {
+          '0%': { opacity: '0', transform: 'translateY(0px) scale(0.5)' },
+          '50%': { opacity: '1', transform: 'translateY(-5px) scale(1)' },
+          '100%': { opacity: '0', transform: 'translateY(-10px) scale(0.5)' },
+        },
+        bounce: {
+          '0%, 100%': { transform: 'translateY(-5%)', animationTimingFunction: 'cubic-bezier(0.8,0,1,1)' },
+          '50%': { transform: 'none', animationTimingFunction: 'cubic-bezier(0,0,0.2,1)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        sparkle: 'sparkle 0.6s ease-out forwards',
+        bounce: 'bounce 1s infinite',
       },
+      boxShadow: {
+        pixel: '4px 4px 0px 0px hsl(var(--foreground))',
+        'pixel-sm': '2px 2px 0px 0px hsl(var(--foreground))',
+        'pixel-primary': '4px 4px 0px 0px hsl(var(--primary))',
+        'pixel-accent': '4px 4px 0px 0px hsl(var(--accent))',
+      }
     },
   },
   plugins: [require('tailwindcss-animate')],
