@@ -1,3 +1,4 @@
+
 "use client"
 
 // Inspired by react-hot-toast library
@@ -135,9 +136,12 @@ let memoryState: State = { toasts: [] }
 
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
-  listeners.forEach((listener) => {
-    listener(memoryState)
-  })
+  // Defer listener notification to the next tick to avoid "update during render" errors
+  setTimeout(() => {
+    listeners.forEach((listener) => {
+      listener(memoryState)
+    })
+  }, 0)
 }
 
 type Toast = Omit<ToasterToast, "id">
@@ -182,7 +186,7 @@ function useToast() {
         listeners.splice(index, 1)
       }
     }
-  }, [state])
+  }, []) // Changed dependency array from [state] to [] for correct listener management
 
   return {
     ...state,
