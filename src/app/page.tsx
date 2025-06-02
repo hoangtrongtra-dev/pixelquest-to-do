@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -9,7 +10,18 @@ import { XpDisplay } from '@/components/pixel-quest/XpDisplay';
 import { PixelPet } from '@/components/pixel-quest/PixelPet';
 import { TaskSuggestions } from '@/components/pixel-quest/TaskSuggestions';
 import { Button } from '@/components/ui/button';
-import { Zap } from 'lucide-react';
+import { Zap, RotateCcw } from 'lucide-react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   getInitialUserStats,
   checkLevelUp,
@@ -25,6 +37,7 @@ export default function HomePage() {
     name: 'PixelPal',
     color: PET_COLORS[0].value, // Default color
   });
+  const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
   const { toast } = useToast();
 
   // Load state from localStorage on mount
@@ -133,6 +146,16 @@ export default function HomePage() {
     setPetConfig((prevConfig) => ({ ...prevConfig, color }));
   };
   
+  const handleResetLevel = () => {
+    setUserStats(getInitialUserStats());
+    toast({
+      title: "Level Reset!",
+      description: "You are back to Level 1 with 0 XP. A fresh start!",
+      variant: "default",
+    });
+    setIsResetDialogOpen(false);
+  };
+
   const currentTaskTexts = tasks.filter(task => !task.completed).map(task => task.text);
 
   return (
@@ -168,9 +191,44 @@ export default function HomePage() {
         
         <section aria-labelledby="task-suggestions-heading">
           <h2 id="task-suggestions-heading" className="sr-only">Task Suggestions</h2>
-          {/* Pass the raw suggestion text to handleAddTask, it will be prefixed with [AI] */}
-          {/* The handleAddTask function will then strip it for display and set the isAISuggested flag */}
           <TaskSuggestions currentTasks={currentTaskTexts} onAddSuggestedTask={(text) => handleAddTask(`[AI] ${text}`, true)} />
+        </section>
+
+        <section aria-labelledby="settings-heading" className="pt-4">
+            <h2 id="settings-heading" className="text-xl font-headline text-foreground mb-2 text-center uppercase">Game Settings</h2>
+            <div className="flex justify-center">
+            <AlertDialog open={isResetDialogOpen} onOpenChange={setIsResetDialogOpen}>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive" className="!rounded-none border-2 border-foreground shadow-pixel-sm font-body text-base">
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Reset Level & XP
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="font-body !rounded-none border-2 border-foreground shadow-pixel">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="font-headline uppercase">Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription className="font-body text-base">
+                    This action will reset your Level to 1 and your XP to 0.
+                    All your hard-earned progress will be lost. This cannot be undone.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel 
+                    onClick={() => setIsResetDialogOpen(false)}
+                    className="!rounded-none border-2 border-foreground shadow-pixel-sm font-body text-base"
+                  >
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction 
+                    onClick={handleResetLevel} 
+                    className="!rounded-none border-2 border-foreground shadow-pixel-sm bg-destructive hover:bg-destructive/90 text-destructive-foreground font-body text-base"
+                  >
+                    Yes, Reset Progress
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+            </div>
         </section>
       </main>
       
