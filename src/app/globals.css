@@ -43,8 +43,8 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 210 30% 10%;
-    --foreground: 207 80% 90%;
+    --background: 210 30% 10%; /* Dark blue for night sky */
+    --foreground: 207 80% 90%; /* Lighter text for dark mode */
     --card: 210 30% 15%;
     --card-foreground: 207 80% 90%;
     --popover: 210 30% 15%;
@@ -85,6 +85,7 @@ body {
   body {
     @apply bg-background text-foreground;
     image-rendering: pixelated; /* Helps with pixel art scaling */
+    transition: background-color 0.3s ease;
   }
   /* Ensure inputs and buttons have sharp corners */
   input, button, textarea, select, [role="button"], [role="checkbox"] {
@@ -96,6 +97,27 @@ body {
     outline-offset: 2px;
   }
 }
+
+html.dark body {
+  /* Starry background for dark mode */
+  background-image:
+    /* Small stars */
+    radial-gradient(1px 1px at 10% 30%, hsl(var(--foreground) / 0.7), transparent),
+    radial-gradient(1px 1px at 80% 10%, hsl(var(--foreground) / 0.6), transparent),
+    radial-gradient(1px 1px at 50% 50%, hsl(var(--foreground) / 0.8), transparent),
+    radial-gradient(1px 1px at 30% 80%, hsl(var(--foreground) / 0.7), transparent),
+    radial-gradient(1px 1px at 90% 60%, hsl(var(--foreground) / 0.5), transparent),
+    radial-gradient(1px 1px at 15% 95%, hsl(var(--foreground) / 0.8), transparent),
+    /* Slightly larger stars */
+    radial-gradient(1.5px 1.5px at 60% 70%, hsl(var(--foreground) / 0.9), transparent),
+    radial-gradient(1.5px 1.5px at 40% 20%, hsl(var(--foreground) / 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 75% 90%, hsl(var(--foreground) / 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 5% 5%, hsl(var(--foreground) / 0.8), transparent);
+  background-repeat: repeat;
+  background-size: 250px 250px; /* Adjust size of the repeating tile for star density */
+  background-attachment: fixed; /* Stars stay in place on scroll */
+}
+
 
 /* Sparkle animation particles */
 .sparkle {
