@@ -10,6 +10,7 @@ import { XpDisplay } from '@/components/pixel-quest/XpDisplay';
 import { PixelPet } from '@/components/pixel-quest/PixelPet';
 import { TaskSuggestions } from '@/components/pixel-quest/TaskSuggestions';
 import { ThemeToggle } from '@/components/pixel-quest/ThemeToggle';
+import { RealTimeClock } from '@/components/pixel-quest/RealTimeClock'; // Import the new component
 import { Button } from '@/components/ui/button';
 import { Zap, RotateCcw } from 'lucide-react';
 import {
@@ -161,7 +162,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-4 md:p-8 font-body flex flex-col items-center">
-      <header className="mb-8 text-center w-full max-w-2xl relative">
+      <header className="mb-4 text-center w-full max-w-2xl relative">
         <div className="flex justify-center items-center relative">
             <h1 className="text-5xl font-headline text-primary tracking-wider uppercase" style={{ textShadow: '3px 3px 0px hsl(var(--foreground))' }}>
             PixelQuest To-Do
@@ -169,6 +170,7 @@ export default function HomePage() {
             <ThemeToggle className="!rounded-none border-2 border-foreground shadow-pixel-sm w-10 h-10 absolute top-1/2 right-0 transform -translate-y-1/2 mr-2 md:mr-0" />
         </div>
         <p className="text-muted-foreground font-body text-lg mt-2">Turn your tasks into epic adventures!</p>
+        <RealTimeClock /> {/* Add the RealTimeClock component here */}
       </header>
 
       <main className="w-full max-w-2xl space-y-6">
