@@ -27,10 +27,10 @@ export function TaskInput({ onAddTask }: TaskInputProps) {
         value={taskText}
         onChange={(e) => setTaskText(e.target.value)}
         placeholder="Add a new quest..."
-        className="flex-grow !rounded-none border-2 border-foreground focus:border-primary shadow-pixel-sm"
+        className="flex-grow !rounded-none border-2 border-foreground focus:border-primary shadow-pixel-sm font-body text-base"
         aria-label="New task"
       />
-      <Button type="submit" variant="default" className="!rounded-none border-2 border-primary-foreground shadow-pixel-sm bg-primary hover:bg-primary/90 text-primary-foreground">
+      <Button type="submit" variant="default" className="!rounded-none border-2 border-foreground shadow-pixel-sm bg-primary hover:bg-primary/90 text-primary-foreground font-body text-base">
         <Plus className="w-5 h-5 mr-1" /> Add
       </Button>
     </form>

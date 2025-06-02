@@ -14,15 +14,15 @@ export function XpDisplay({ stats }: XpDisplayProps) {
   return (
     <Card className="mb-4 !rounded-none border-2 border-foreground shadow-pixel">
       <CardHeader className="pb-2">
-        <CardTitle className="font-headline text-2xl text-center">Level: {stats.level}</CardTitle>
+        <CardTitle className="font-headline text-2xl text-center uppercase">Level: {stats.level}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="text-center mb-2 font-body">
+        <div className="text-center mb-2 font-body text-lg">
           XP: {stats.xp} / {stats.xpToNextLevel}
         </div>
-        <Progress value={progressPercentage} className="h-6 !rounded-none border-2 border-foreground bg-muted" indicatorClassName="bg-accent" />
+        <Progress value={progressPercentage} className="h-6 !rounded-none border-2 border-foreground bg-muted" indicatorClassName="!rounded-none bg-accent" />
         { stats.xp >= stats.xpToNextLevel && (
-          <p className="text-center mt-2 text-sm text-green-500 font-bold animate-bounce">LEVEL UP!</p>
+          <p className="text-center mt-2 text-sm text-green-500 font-bold animate-bounce font-body">LEVEL UP!</p>
         )}
       </CardContent>
     </Card>

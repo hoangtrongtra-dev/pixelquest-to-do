@@ -69,16 +69,16 @@ export function TaskSuggestions({ currentTasks, onAddSuggestedTask }: TaskSugges
   return (
     <Card className="mt-6 !rounded-none border-2 border-foreground shadow-pixel">
       <CardHeader>
-        <CardTitle className="font-headline text-xl flex items-center gap-2">
+        <CardTitle className="font-headline text-xl flex items-center gap-2 uppercase">
           <Lightbulb className="w-5 h-5 text-yellow-400" /> AI Quest Helper
         </CardTitle>
-        <CardDescription className="font-body">Stuck? Let AI suggest your next quests for bonus XP!</CardDescription>
+        <CardDescription className="font-body text-base">Stuck? Let AI suggest your next quests for bonus XP!</CardDescription>
       </CardHeader>
       <CardContent>
         <Button
           onClick={handleGetSuggestions}
           disabled={isLoading}
-          className="w-full !rounded-none border-2 border-accent-foreground shadow-pixel-sm bg-accent hover:bg-accent/90 text-accent-foreground mb-4"
+          className="w-full !rounded-none border-2 border-foreground shadow-pixel-sm bg-accent hover:bg-accent/90 text-accent-foreground mb-4 font-body text-base"
         >
           {isLoading ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -90,16 +90,16 @@ export function TaskSuggestions({ currentTasks, onAddSuggestedTask }: TaskSugges
 
         {suggestions.length > 0 && (
           <div className="space-y-2 mt-4">
-            <h4 className="font-headline text-md text-foreground">Suggested Quests:</h4>
-            <ul className="list-none space-y-1">
+            <h4 className="font-headline text-md text-foreground uppercase">Suggested Quests:</h4>
+            <ul className="list-none space-y-1 font-body text-base">
               {suggestions.map((suggestion, index) => (
-                <li key={index} className="flex items-center justify-between p-2 bg-background border border-muted text-sm">
+                <li key={index} className="flex items-center justify-between p-2 bg-background border border-muted !rounded-none text-sm">
                   <span>{suggestion}</span>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => handleAddSuggestion(suggestion)}
-                    className="!rounded-none text-primary hover:bg-primary/10"
+                    className="!rounded-none text-primary hover:bg-primary/10 font-body text-base"
                     aria-label={`Add suggested task: ${suggestion}`}
                   >
                     <PlusCircle className="w-4 h-4 mr-1" /> Add

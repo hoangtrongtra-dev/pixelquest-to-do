@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: "Space Grotesk", Arial, Helvetica, sans-serif;
+  font-family: "VT323", "Courier New", Courier, monospace;
 }
 
 @layer base {
@@ -87,7 +87,7 @@ body {
     image-rendering: pixelated; /* Helps with pixel art scaling */
   }
   /* Ensure inputs and buttons have sharp corners */
-  input, button, textarea, select {
+  input, button, textarea, select, [role="button"], [role="checkbox"] {
     @apply rounded-none;
   }
   /* Custom pixelated focus style */

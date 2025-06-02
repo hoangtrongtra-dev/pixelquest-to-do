@@ -28,7 +28,7 @@ export function TaskItem({ task, onToggleComplete, onDeleteTask }: TaskItemProps
   
   return (
     <div className={cn(
-      "flex items-center justify-between p-3 border-2 border-foreground bg-card mb-2 relative overflow-hidden",
+      "flex items-center justify-between p-3 border-2 border-foreground !rounded-none mb-2 relative overflow-hidden",
       task.completed ? "bg-card/60" : "bg-card shadow-pixel-sm"
       )}>
       <div className="flex items-center gap-3">
@@ -40,7 +40,7 @@ export function TaskItem({ task, onToggleComplete, onDeleteTask }: TaskItemProps
         <span
           id={`task-text-${task.id}`}
           className={cn(
-            'font-body text-card-foreground break-all',
+            'font-body text-card-foreground break-all text-base',
             { 'line-through text-muted-foreground': task.completed }
           )}
         >

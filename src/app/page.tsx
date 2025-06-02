@@ -100,7 +100,7 @@ export default function HomePage() {
           toast({
             title: "LEVEL UP!",
             description: `Congratulations! You've reached Level ${newStats.level}!`,
-            action: <Button variant="ghost" size="sm" className="text-yellow-400"><Zap className="w-4 h-4 mr-1"/> Awesome!</Button>
+            action: <Button variant="ghost" size="sm" className="text-yellow-400 !rounded-none"><Zap className="w-4 h-4 mr-1"/> Awesome!</Button>
           });
         }
         return newStats;
@@ -130,10 +130,10 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background text-foreground p-4 md:p-8 font-body flex flex-col items-center">
       <header className="mb-8 text-center">
-        <h1 className="text-5xl font-headline text-primary tracking-wider" style={{ textShadow: '2px 2px 0px hsl(var(--foreground))' }}>
+        <h1 className="text-5xl font-headline text-primary tracking-wider uppercase" style={{ textShadow: '3px 3px 0px hsl(var(--foreground))' }}>
           PixelQuest To-Do
         </h1>
-        <p className="text-muted-foreground font-body">Turn your tasks into epic adventures!</p>
+        <p className="text-muted-foreground font-body text-lg">Turn your tasks into epic adventures!</p>
       </header>
 
       <main className="w-full max-w-2xl space-y-6">
@@ -145,12 +145,12 @@ export default function HomePage() {
         </section>
         
         <section aria-labelledby="add-task-heading">
-           <h2 id="add-task-heading" className="text-2xl font-headline text-foreground mb-2 text-center">Add New Quest</h2>
+           <h2 id="add-task-heading" className="text-2xl font-headline text-foreground mb-2 text-center uppercase">Add New Quest</h2>
           <TaskInput onAddTask={(text) => handleAddTask(text, false)} />
         </section>
 
         <section aria-labelledby="task-list-heading">
-          <h2 id="task-list-heading" className="text-2xl font-headline text-foreground mb-2 text-center">Your Quests</h2>
+          <h2 id="task-list-heading" className="text-2xl font-headline text-foreground mb-2 text-center uppercase">Your Quests</h2>
           <TaskList
             tasks={tasks}
             onToggleComplete={handleToggleComplete}

@@ -3,7 +3,6 @@
 import type { PixelPetConfig } from '@/lib/types';
 import { PET_COLORS } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Paintbrush } from 'lucide-react';
 import {
   Select,
@@ -30,7 +29,7 @@ export function PixelPet({ petConfig, onUpdatePetColor }: PixelPetProps) {
   return (
     <Card className="!rounded-none border-2 border-foreground shadow-pixel">
       <CardHeader className="pb-2">
-        <CardTitle className="font-headline text-2xl text-center flex items-center justify-center gap-2">
+        <CardTitle className="font-headline text-2xl text-center flex items-center justify-center gap-2 uppercase">
           <Paintbrush className="w-6 h-6 text-primary" /> {petConfig.name}
         </CardTitle>
       </CardHeader>
@@ -42,7 +41,7 @@ export function PixelPet({ petConfig, onUpdatePetColor }: PixelPetProps) {
               {row.map((pixel, pixelIndex) => (
                 <div
                   key={pixelIndex}
-                  className={`w-4 h-4 ${pixel === 1 ? petConfig.color : 'bg-transparent'}`}
+                  className={`w-5 h-5 ${pixel === 1 ? petConfig.color : 'bg-transparent'}`}
                   style={{ imageRendering: 'pixelated' }}
                 ></div>
               ))}
@@ -57,7 +56,7 @@ export function PixelPet({ petConfig, onUpdatePetColor }: PixelPetProps) {
             <SelectTrigger id="pet-color-select" className="w-full !rounded-none border-2 border-foreground focus:border-primary shadow-pixel-sm">
               <SelectValue placeholder="Select color" />
             </SelectTrigger>
-            <SelectContent className="!rounded-none border-2 border-foreground bg-background">
+            <SelectContent className="!rounded-none border-2 border-foreground bg-background font-body">
               {PET_COLORS.map((color) => (
                 <SelectItem key={color.value} value={color.value} className="font-body !rounded-none focus:bg-accent">
                   <div className="flex items-center gap-2">
@@ -69,7 +68,7 @@ export function PixelPet({ petConfig, onUpdatePetColor }: PixelPetProps) {
             </SelectContent>
           </Select>
         </div>
-        <p className="text-xs text-muted-foreground mt-2 text-center">More customizations unlock as you level up!</p>
+        <p className="text-xs text-muted-foreground mt-2 text-center font-body">More customizations unlock as you level up!</p>
 
       </CardContent>
     </Card>

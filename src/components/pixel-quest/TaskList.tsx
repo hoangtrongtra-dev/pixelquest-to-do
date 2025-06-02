@@ -12,7 +12,7 @@ interface TaskListProps {
 
 export function TaskList({ tasks, onToggleComplete, onDeleteTask }: TaskListProps) {
   if (tasks.length === 0) {
-    return <p className="text-center text-muted-foreground py-4">No quests yet! Add some to begin your adventure.</p>;
+    return <p className="text-center text-muted-foreground py-4 font-body text-base">No quests yet! Add some to begin your adventure.</p>;
   }
 
   // Sort tasks: incomplete first, then by creation date (newest first for incomplete, oldest first for complete)
@@ -25,7 +25,7 @@ export function TaskList({ tasks, onToggleComplete, onDeleteTask }: TaskListProp
 
 
   return (
-    <ScrollArea className="h-[300px] w-full p-1 border-2 border-foreground bg-background">
+    <ScrollArea className="h-[300px] w-full p-1 border-2 border-foreground bg-background !rounded-none">
       <div className="space-y-2 p-2">
         {sortedTasks.map((task) => (
           <TaskItem

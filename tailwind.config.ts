@@ -13,12 +13,14 @@ export default {
     'bg-red-400',
     'bg-purple-400',
     'bg-yellow-400',
+    'font-body',
+    'font-headline'
   ],
   theme: {
     extend: {
       fontFamily: {
-        body: ['"Space Grotesk"', 'sans-serif'],
-        headline: ['"Space Grotesk"', 'sans-serif'],
+        body: ['"VT323"', '"Courier New"', 'Courier', 'monospace'],
+        headline: ['"VT323"', '"Courier New"', 'Courier', 'monospace'],
         code: ['monospace'],
       },
       colors: {
@@ -75,7 +77,7 @@ export default {
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 0px)', // Keep md and sm same as lg for pixel style
+        md: 'calc(var(--radius) - 0px)', 
         sm: 'calc(var(--radius) - 0px)',
       },
       keyframes: {
@@ -112,10 +114,10 @@ export default {
         bounce: 'bounce 1s infinite',
       },
       boxShadow: {
-        pixel: '4px 4px 0px 0px hsl(var(--foreground))',
+        pixel: '3px 3px 0px 0px hsl(var(--foreground))',
         'pixel-sm': '2px 2px 0px 0px hsl(var(--foreground))',
-        'pixel-primary': '4px 4px 0px 0px hsl(var(--primary))',
-        'pixel-accent': '4px 4px 0px 0px hsl(var(--accent))',
+        'pixel-primary': '3px 3px 0px 0px hsl(var(--primary))',
+        'pixel-accent': '3px 3px 0px 0px hsl(var(--accent))',
       }
     },
   },
