@@ -28,13 +28,3 @@ export function XpDisplay({ stats }: XpDisplayProps) {
     </Card>
   );
 }
-
-// Helper component for Progress indicator with pixel style
-function PixelProgressIndicator({ className, ...props }: React.ComponentProps<typeof ProgressPrimitive.Indicator>) {
-  return <ProgressPrimitive.Indicator className={cn("h-full w-full flex-1 bg-accent transition-all !rounded-none", className)} {...props} />;
-}
-
-// This import is needed if you use ProgressPrimitive directly. Since we use shadcn/ui Progress, it might not be.
-// Keeping it here for context on how one might customize further.
-import * as ProgressPrimitive from "@radix-ui/react-progress"
-import { cn } from '@/lib/utils';
